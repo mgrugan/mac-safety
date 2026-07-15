@@ -10,9 +10,21 @@ const STATUS_FILTERS: { value: Status | 'all'; label: string }[] = [
   { value: 'done', label: 'Done' },
 ]
 
-export function Sidebar({ projects }: { projects: Project[] }) {
+export function Sidebar({
+  projects,
+  open = false,
+  onClose,
+}: {
+  projects: Project[]
+  open?: boolean
+  onClose?: () => void
+}) {
   const current = useStore((s) => s.filters.status)
   const setFilter = useStore((s) => s.setFilter)
+  const pick = (value: typeof current) => {
+    setFilter('status', value)
+    onClose?.()
+  }
 
   const counts = projects.reduce<Record<string, number>>((acc, p) => {
     acc[p.status] = (acc[p.status] ?? 0) + 1
@@ -27,7 +39,7 @@ export function Sidebar({ projects }: { projects: Project[] }) {
   ).length
 
   return (
-    <nav className="sidebar" aria-label="Filters and summary">
+    <nav className={`sidebar${open ? ' open' : ''}`} aria-label="Filters and summary">
       <div className="side-group">
         <h3>Library</h3>
         {STATUS_FILTERS.map((f) => (
@@ -35,7 +47,7 @@ export function Sidebar({ projects }: { projects: Project[] }) {
             key={f.value}
             className="side-item"
             aria-current={current === f.value}
-            onClick={() => setFilter('status', f.value)}
+            onClick={() => pick(f.value)}
           >
             <span
               className="dot"

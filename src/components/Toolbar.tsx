@@ -83,7 +83,7 @@ export function Toolbar({
       <div className="spacer" />
 
       <button className="btn primary" onClick={onNew} title="New project (⌘N)">
-        <IconPlus /> New Project
+        <IconPlus /> <span className="label">New Project</span>
       </button>
     </div>
   )

@@ -1,7 +1,7 @@
 import { useStore, type ThemePref } from '../store'
-import { IconSun } from './icons'
+import { IconMenu, IconSun } from './icons'
 
-export function TitleBar({ count }: { count: number }) {
+export function TitleBar({ count, onMenu }: { count: number; onMenu: () => void }) {
   const theme = useStore((s) => s.theme)
   const setTheme = useStore((s) => s.setTheme)
 
@@ -13,6 +13,14 @@ export function TitleBar({ count }: { count: number }) {
 
   return (
     <header className="titlebar">
+      <button
+        className="iconbtn mobile-only"
+        onClick={onMenu}
+        aria-label="Open filters"
+        title="Filters"
+      >
+        <IconMenu />
+      </button>
       <span className="app-name">Mac Safety Take Home</span>
       <span className="app-sub">
         {count} {count === 1 ? 'project' : 'projects'}

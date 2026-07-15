@@ -17,15 +17,16 @@ const COLUMNS: { key: SortKey | null; label: string; sortable: boolean }[] = [
 
 export function ProjectTable({
   projects,
+  onOpen,
   onEdit,
 }: {
   projects: Project[]
+  onOpen: (id: string) => void
   onEdit: (id: string) => void
 }) {
   const sort = useStore((s) => s.sort)
   const setSort = useStore((s) => s.setSort)
   const selectedId = useStore((s) => s.selectedId)
-  const select = useStore((s) => s.select)
   const toggleComplete = useStore((s) => s.toggleComplete)
   const duplicate = useStore((s) => s.duplicateProject)
   const remove = useStore((s) => s.deleteProject)
@@ -70,7 +71,7 @@ export function ProjectTable({
               <tr
                 key={p.id}
                 aria-selected={selectedId === p.id}
-                onClick={() => select(p.id)}
+                onClick={() => onOpen(p.id)}
                 onDoubleClick={() => onEdit(p.id)}
                 style={{ cursor: 'default' }}
               >

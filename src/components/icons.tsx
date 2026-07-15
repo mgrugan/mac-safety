@@ -73,3 +73,24 @@ export const IconSun = (p: SVGProps<SVGSVGElement>) => (
     <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
   </svg>
 )
+export const IconMenu = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+)
+export const IconChevronRight = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 15, height: 15, ...p })}>
+    <path d="m9 6 6 6-6 6" />
+  </svg>
+)
+export const IconCalendar = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 14, height: 14, ...p })}>
+    <rect x="3" y="4" width="18" height="18" rx="2" />
+    <path d="M16 2v4M8 2v4M3 10h18" />
+  </svg>
+)
+export const IconWind = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 14, height: 14, ...p })}>
+    <path d="M3 8h11a3 3 0 1 0-3-3M3 16h15a3 3 0 1 1-3 3M3 12h9" />
+  </svg>
+)
