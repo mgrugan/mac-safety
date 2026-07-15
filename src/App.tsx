@@ -55,7 +55,7 @@ export default function App() {
       <Nav view={view} onView={setView} onNew={openNew} open={navOpen} onClose={() => setNavOpen(false)} />
 
       <div className="main">
-        <TopBar onMenu={() => setNavOpen(true)} onOpenProject={openDetail} />
+        <TopBar onMenu={() => setNavOpen(true)} onOpenProject={openDetail} effective={effective} />
         <div className="content">
           {view === 'map' ? (
             <ProjectMap projects={visible} theme={effective} onOpen={openDetail} />

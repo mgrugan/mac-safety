@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { useStore, type ThemePref } from '../store'
+import { useStore } from '../store'
+import type { Effective } from '../theme'
 import type { Project } from '../types'
 import { STATUS_COLOR } from './Badges'
-import { IconBell, IconCalendar, IconMenu, IconSearch, IconSun, IconWarning } from './icons'
+import { IconBell, IconCalendar, IconMenu, IconMoon, IconSearch, IconSun, IconWarning } from './icons'
 
 interface Alert {
   project: Project
@@ -38,21 +39,21 @@ function computeAlerts(projects: Project[]): Alert[] {
 export function TopBar({
   onMenu,
   onOpenProject,
+  effective,
 }: {
   onMenu: () => void
   onOpenProject: (id: string) => void
+  effective: Effective
 }) {
   const query = useStore((s) => s.filters.query)
   const setFilter = useStore((s) => s.setFilter)
   const projects = useStore((s) => s.projects)
-  const theme = useStore((s) => s.theme)
   const setTheme = useStore((s) => s.setTheme)
   const [bellOpen, setBellOpen] = useState(false)
 
-  const cycle = () => {
-    const order: ThemePref[] = ['system', 'light', 'dark']
-    setTheme(order[(order.indexOf(theme) + 1) % order.length])
-  }
+  // One click flips between the two visible themes (no silent "system" step).
+  const isDark = effective === 'dark'
+  const toggleTheme = () => setTheme(isDark ? 'light' : 'dark')
 
   const alerts = computeAlerts(projects)
 
@@ -128,8 +129,13 @@ export function TopBar({
       </div>
 
       <div className="topbar-div desktop-only" />
-      <button className="iconbtn" onClick={cycle} title={`Appearance: ${theme}`} aria-label="Toggle appearance">
-        <IconSun />
+      <button
+        className="iconbtn"
+        onClick={toggleTheme}
+        title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+        aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      >
+        {isDark ? <IconSun /> : <IconMoon />}
       </button>
     </header>
   )
