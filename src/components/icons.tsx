@@ -94,3 +94,87 @@ export const IconWind = (p: SVGProps<SVGSVGElement>) => (
     <path d="M3 8h11a3 3 0 1 0-3-3M3 16h15a3 3 0 1 1-3 3M3 12h9" />
   </svg>
 )
+export const IconLayers = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 18, height: 18, ...p })}>
+    <path d="m12 2 9 5-9 5-9-5 9-5Z" />
+    <path d="m3 12 9 5 9-5M3 17l9 5 9-5" />
+  </svg>
+)
+export const IconGrid = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <rect x="3" y="3" width="7" height="7" rx="1.5" />
+    <rect x="14" y="3" width="7" height="7" rx="1.5" />
+    <rect x="14" y="14" width="7" height="7" rx="1.5" />
+    <rect x="3" y="14" width="7" height="7" rx="1.5" />
+  </svg>
+)
+export const IconFolder = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" />
+  </svg>
+)
+export const IconSettings = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <circle cx="12" cy="12" r="3" />
+    <path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 6.6 19l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3 13.6H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 7l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 2.7-1.1V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1.1 2.7H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1Z" />
+  </svg>
+)
+export const IconBell = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 20, height: 20, ...p })}>
+    <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0" />
+  </svg>
+)
+export const IconHelp = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 20, height: 20, ...p })}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4M12 17h.01" />
+  </svg>
+)
+export const IconMoreVert = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <circle cx="12" cy="5" r="1" /><circle cx="12" cy="12" r="1" /><circle cx="12" cy="19" r="1" />
+  </svg>
+)
+export const IconChevronDown = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 15, height: 15, ...p })}><path d="m6 9 6 6 6-6" /></svg>
+)
+export const IconSort = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 14, height: 14, ...p })}><path d="m8 9 4-4 4 4M8 15l4 4 4-4" /></svg>
+)
+export const IconDroplet = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 16, height: 16, ...p })}>
+    <path d="M12 2.7 6.5 9.5a7 7 0 1 0 11 0L12 2.7Z" />
+  </svg>
+)
+export const IconRain = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 16, height: 16, ...p })}>
+    <path d="M4 14a4 4 0 0 1 .5-8 5.5 5.5 0 0 1 10.6 1.5A3.5 3.5 0 0 1 15 14M8 18v2M12 18v3M16 18v2" />
+  </svg>
+)
+export const IconThermometer = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 16, height: 16, ...p })}>
+    <path d="M14 14.8V5a2 2 0 1 0-4 0v9.8a4 4 0 1 0 4 0Z" />
+  </svg>
+)
+export const IconInfo = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 18, height: 18, ...p })}>
+    <circle cx="12" cy="12" r="9" /><path d="M12 16v-4M12 8h.01" />
+  </svg>
+)
+export const IconWarning = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 15, height: 15, ...p })}>
+    <path d="M10.3 3.3 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.3a2 2 0 0 0-3.4 0Z" />
+    <path d="M12 9v4M12 17h.01" />
+  </svg>
+)
+export const IconDownload = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 15, height: 15, ...p })}>
+    <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
+  </svg>
+)
+export const IconTrendingUp = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 13, height: 13, ...p })}><path d="m3 17 6-6 4 4 8-8M15 7h6v6" /></svg>
+)
+export const IconAdd = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base({ width: 18, height: 18, ...p })}><path d="M12 5v14M5 12h14" /></svg>
+)

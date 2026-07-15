@@ -2,18 +2,22 @@ import { useStore, type SortKey } from '../store'
 import { hasCoords, type Project } from '../types'
 import { PriorityBadge, StatusBadge } from './Badges'
 import { WeatherChip } from './WeatherChip'
-import { IconCheck, IconCopy, IconEdit, IconPin, IconTrash } from './icons'
+import { IconCheck, IconEdit, IconMoreVert, IconPin, IconSort } from './icons'
 
-const COLUMNS: { key: SortKey | null; label: string; sortable: boolean }[] = [
+const COLS: { key: SortKey | null; label: string; sortable: boolean }[] = [
   { key: null, label: '', sortable: false },
-  { key: 'title', label: 'Project', sortable: true },
+  { key: 'title', label: 'Title', sortable: true },
   { key: 'status', label: 'Status', sortable: true },
   { key: 'priority', label: 'Priority', sortable: true },
-  { key: 'dueDate', label: 'Due', sortable: true },
-  { key: null, label: 'Location', sortable: false },
+  { key: 'dueDate', label: 'Due Date', sortable: true },
+  { key: null, label: 'Coordinates', sortable: false },
   { key: null, label: 'Conditions', sortable: false },
-  { key: null, label: '', sortable: false },
+  { key: null, label: 'Actions', sortable: false },
 ]
+
+export function shortId(id: string): string {
+  return '#MS-' + id.replace(/[^a-z0-9]/gi, '').slice(0, 6).toUpperCase()
+}
 
 export function ProjectTable({
   projects,
@@ -28,167 +32,134 @@ export function ProjectTable({
   const setSort = useStore((s) => s.setSort)
   const selectedId = useStore((s) => s.selectedId)
   const toggleComplete = useStore((s) => s.toggleComplete)
-  const duplicate = useStore((s) => s.duplicateProject)
-  const remove = useStore((s) => s.deleteProject)
 
-  if (projects.length === 0) return <TableEmpty />
+  if (projects.length === 0) {
+    return (
+      <div className="grid-card">
+        <div className="empty" style={{ height: 280 }}>
+          <h3>No projects match</h3>
+          <p>Adjust your filters or search, or create a new field project.</p>
+        </div>
+      </div>
+    )
+  }
 
   const today = new Date().toISOString().slice(0, 10)
 
   return (
-    <div className="table-wrap">
-      <table className="projects">
-        <thead>
-          <tr>
-            {COLUMNS.map((c, i) => (
-              <th
-                key={i}
-                className={c.sortable ? 'sortable' : undefined}
-                onClick={c.sortable && c.key ? () => setSort(c.key!) : undefined}
-                aria-sort={
-                  c.key && sort.key === c.key
-                    ? sort.dir === 'asc'
-                      ? 'ascending'
-                      : 'descending'
-                    : undefined
-                }
-              >
-                {c.label}
-                {c.key && sort.key === c.key && (
-                  <span className="arrow" aria-hidden>
-                    {sort.dir === 'asc' ? '↑' : '↓'}
+    <div className="grid-card">
+      <div className="grid-scroll">
+        <table className="grid">
+          <thead>
+            <tr>
+              {COLS.map((c, i) => (
+                <th
+                  key={i}
+                  className={c.sortable ? 'sortable' : undefined}
+                  style={i === COLS.length - 1 ? { textAlign: 'right' } : undefined}
+                  onClick={c.sortable && c.key ? () => setSort(c.key!) : undefined}
+                  aria-sort={
+                    c.key && sort.key === c.key
+                      ? sort.dir === 'asc' ? 'ascending' : 'descending'
+                      : undefined
+                  }
+                >
+                  <span className="sortwrap">
+                    {c.label}
+                    {c.sortable && (
+                      <IconSort style={{ opacity: sort.key === c.key ? 1 : 0.4, color: sort.key === c.key ? 'var(--primary)' : undefined }} />
+                    )}
                   </span>
-                )}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {projects.map((p) => {
-            const overdue = p.dueDate && p.status !== 'done' && p.dueDate < today
-            const done = p.status === 'done'
-            return (
-              <tr
-                key={p.id}
-                aria-selected={selectedId === p.id}
-                onClick={() => onOpen(p.id)}
-                onDoubleClick={() => onEdit(p.id)}
-                style={{ cursor: 'default' }}
-              >
-                <td onClick={(e) => e.stopPropagation()}>
-                  <button
-                    className={`check ${done ? 'on' : ''}`}
-                    onClick={() => toggleComplete(p.id)}
-                    aria-pressed={done}
-                    title={done ? 'Mark as active' : 'Mark complete'}
-                  >
-                    <IconCheck />
-                  </button>
-                </td>
-                <td>
-                  <span
-                    className="cell-title"
-                    style={
-                      done
-                        ? { textDecoration: 'line-through', color: 'var(--ink-3)' }
-                        : undefined
-                    }
-                  >
-                    {p.title || 'Untitled project'}
-                    {p.notes && <span className="muted">{truncate(p.notes, 64)}</span>}
-                  </span>
-                </td>
-                <td>
-                  <StatusBadge status={p.status} />
-                </td>
-                <td>
-                  <PriorityBadge priority={p.priority} />
-                </td>
-                <td>
-                  {p.dueDate ? (
-                    <span className={`due ${overdue ? 'overdue' : ''}`}>
-                      {formatDate(p.dueDate)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {projects.map((p) => {
+              const done = p.status === 'done'
+              const overdue = p.dueDate && !done && p.dueDate < today
+              return (
+                <tr
+                  key={p.id}
+                  aria-selected={selectedId === p.id}
+                  onClick={() => onOpen(p.id)}
+                  onDoubleClick={() => onEdit(p.id)}
+                >
+                  <td onClick={(e) => e.stopPropagation()} style={{ width: 48 }}>
+                    <button
+                      className={`cbx ${done ? 'on' : ''}`}
+                      onClick={() => toggleComplete(p.id)}
+                      aria-pressed={done}
+                      title={done ? 'Mark as active' : 'Mark complete'}
+                    >
+                      <IconCheck />
+                    </button>
+                  </td>
+                  <td>
+                    <span className="cell-title">
+                      <span className={`t ${done ? 'done' : ''}`}>{p.title || 'Untitled project'}</span>
+                      <span className="id">{shortId(p.id)}</span>
                     </span>
-                  ) : (
-                    <span style={{ color: 'var(--ink-3)' }}>—</span>
-                  )}
-                </td>
-                <td>
-                  {p.location.label || hasCoords(p) ? (
-                    <span className="cell-loc">
-                      <IconPin />
-                      <span>
-                        {p.location.label || '—'}
-                        {hasCoords(p) && (
-                          <span className="cell-coords">
-                            {' '}
-                            {p.location.lat!.toFixed(3)}, {p.location.lng!.toFixed(3)}
-                          </span>
-                        )}
-                      </span>
+                  </td>
+                  <td><StatusBadge status={p.status} /></td>
+                  <td><PriorityBadge priority={p.priority} /></td>
+                  <td>
+                    {p.dueDate ? (
+                      <span className={`cell-due ${overdue ? 'overdue' : ''}`}>{formatDate(p.dueDate)}</span>
+                    ) : (
+                      <span style={{ color: 'var(--on-surface-variant)' }}>—</span>
+                    )}
+                  </td>
+                  <td>
+                    {hasCoords(p) ? (
+                      <span className="cell-coords">{fmtCoord(p.location.lat!, true)}, {fmtCoord(p.location.lng!, false)}</span>
+                    ) : (
+                      <span className="cell-coords" style={{ opacity: 0.6 }}>—</span>
+                    )}
+                  </td>
+                  <td>
+                    {hasCoords(p) ? (
+                      <WeatherChip lat={p.location.lat} lng={p.location.lng} />
+                    ) : (
+                      <span style={{ color: 'var(--on-surface-variant)' }}>—</span>
+                    )}
+                  </td>
+                  <td onClick={(e) => e.stopPropagation()} style={{ textAlign: 'right' }}>
+                    <span className="row-actions">
+                      <button className="mini-icon" title="Edit" onClick={() => onEdit(p.id)}>
+                        <IconEdit width={18} height={18} />
+                      </button>
+                      <button className="mini-icon" title="Details" onClick={() => onOpen(p.id)}>
+                        <IconMoreVert width={18} height={18} />
+                      </button>
                     </span>
-                  ) : (
-                    <span style={{ color: 'var(--ink-3)' }}>No location</span>
-                  )}
-                </td>
-                <td>
-                  {hasCoords(p) ? (
-                    <WeatherChip lat={p.location.lat} lng={p.location.lng} />
-                  ) : (
-                    <span style={{ color: 'var(--ink-3)' }}>—</span>
-                  )}
-                </td>
-                <td onClick={(e) => e.stopPropagation()}>
-                  <span className="rowtools">
-                    <button
-                      className="iconbtn"
-                      title="Edit"
-                      onClick={() => onEdit(p.id)}
-                    >
-                      <IconEdit width={15} height={15} />
-                    </button>
-                    <button
-                      className="iconbtn"
-                      title="Duplicate"
-                      onClick={() => duplicate(p.id)}
-                    >
-                      <IconCopy width={15} height={15} />
-                    </button>
-                    <button
-                      className="iconbtn"
-                      title="Delete"
-                      onClick={() => {
-                        if (confirm(`Delete "${p.title || 'Untitled project'}"?`))
-                          remove(p.id)
-                      }}
-                    >
-                      <IconTrash width={15} height={15} />
-                    </button>
-                  </span>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+      <div className="grid-foot">
+        <span>Showing {projects.length} {projects.length === 1 ? 'project' : 'projects'}</span>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          <IconPin width={13} height={13} />
+          {projects.filter(hasCoords).length} mapped
+        </span>
+      </div>
     </div>
   )
 }
 
-function TableEmpty() {
-  return (
-    <div className="empty">
-      <h2>No projects match</h2>
-      <p>Adjust your filters or search, or create a new field project to get started.</p>
-    </div>
-  )
-}
-
-function truncate(s: string, n: number): string {
-  return s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s
+function fmtCoord(v: number, isLat: boolean): string {
+  const dir = isLat ? (v >= 0 ? 'N' : 'S') : v >= 0 ? 'E' : 'W'
+  return `${Math.abs(v).toFixed(4)}° ${dir}`
 }
 
 function formatDate(iso: string): string {
-  const d = new Date(iso + 'T00:00:00')
-  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
+  return new Date(iso + 'T00:00:00').toLocaleDateString(undefined, {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  })
 }

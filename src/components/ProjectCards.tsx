@@ -17,7 +17,7 @@ export function ProjectCards({
   if (projects.length === 0) {
     return (
       <div className="empty">
-        <h2>No projects match</h2>
+        <h3>No projects match</h3>
         <p>Adjust your filters or search, or create a new field project.</p>
       </div>
     )
@@ -29,61 +29,38 @@ export function ProjectCards({
         const done = p.status === 'done'
         const overdue = p.dueDate && !done && p.dueDate < today
         return (
-          <button
-            key={p.id}
-            className="card"
-            onClick={() => onOpen(p.id)}
-            aria-label={`Open ${p.title || 'Untitled project'}`}
-          >
+          <button key={p.id} className="card" onClick={() => onOpen(p.id)} aria-label={`Open ${p.title || 'Untitled project'}`}>
             <span
-              className={`check ${done ? 'on' : ''}`}
+              className={`cbx ${done ? 'on' : ''}`}
               role="checkbox"
               aria-checked={done}
               tabIndex={0}
-              onClick={(e) => {
-                e.stopPropagation()
-                toggleComplete(p.id)
-              }}
+              onClick={(e) => { e.stopPropagation(); toggleComplete(p.id) }}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  toggleComplete(p.id)
-                }
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); toggleComplete(p.id) }
               }}
             >
               <IconCheck />
             </span>
-
             <span className="card-body">
-              <span
-                className="card-title"
-                style={done ? { textDecoration: 'line-through', color: 'var(--ink-3)' } : undefined}
-              >
+              <span className="card-title" style={done ? { textDecoration: 'line-through', color: 'var(--on-surface-variant)' } : undefined}>
                 {p.title || 'Untitled project'}
               </span>
-              <span className="card-badges">
+              <span className="card-row">
                 <StatusBadge status={p.status} />
                 <PriorityBadge priority={p.priority} />
               </span>
-              <span className="card-meta">
+              <span className="card-row">
                 {p.dueDate && (
-                  <span className={`chip ${overdue ? 'overdue' : ''}`}>
-                    <IconCalendar /> {formatDate(p.dueDate)}
-                  </span>
+                  <span className={`chip ${overdue ? 'overdue' : ''}`}><IconCalendar /> {formatDate(p.dueDate)}</span>
                 )}
                 {p.location.label && (
-                  <span className="chip">
-                    <IconPin width={12} height={12} /> {p.location.label}
-                  </span>
+                  <span className="chip"><IconPin width={12} height={12} /> {p.location.label}</span>
                 )}
                 {hasCoords(p) && <WeatherChip lat={p.location.lat} lng={p.location.lng} />}
               </span>
             </span>
-
-            <span className="card-go" aria-hidden>
-              <IconChevronRight />
-            </span>
+            <span className="card-go" aria-hidden><IconChevronRight /></span>
           </button>
         )
       })}
@@ -92,8 +69,5 @@ export function ProjectCards({
 }
 
 function formatDate(iso: string): string {
-  return new Date(iso + 'T00:00:00').toLocaleDateString(undefined, {
-    month: 'short',
-    day: 'numeric',
-  })
+  return new Date(iso + 'T00:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
 }

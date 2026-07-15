@@ -5,7 +5,10 @@
 
 export interface Weather {
   temperatureC: number
+  feelsLikeC: number
   windKph: number
+  humidity: number
+  precipitation: number
   code: number
   isDay: boolean
   label: string
@@ -48,7 +51,8 @@ export async function fetchWeather(
 ): Promise<Weather> {
   const url =
     `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}` +
-    `&current=temperature_2m,wind_speed_10m,weather_code,is_day&wind_speed_unit=kmh`
+    `&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,` +
+    `wind_speed_10m,weather_code,is_day&wind_speed_unit=kmh`
   const res = await fetch(url, { signal })
   if (!res.ok) throw new Error(`Weather request failed (${res.status})`)
   const data = await res.json()
@@ -57,7 +61,10 @@ export async function fetchWeather(
   const meta = WMO[code] ?? { label: 'Unknown', emoji: '•' }
   return {
     temperatureC: Math.round(c.temperature_2m ?? 0),
+    feelsLikeC: Math.round(c.apparent_temperature ?? c.temperature_2m ?? 0),
     windKph: Math.round(c.wind_speed_10m ?? 0),
+    humidity: Math.round(c.relative_humidity_2m ?? 0),
+    precipitation: c.precipitation ?? 0,
     code,
     isDay: c.is_day === 1,
     label: meta.label,

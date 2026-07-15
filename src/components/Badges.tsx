@@ -1,16 +1,16 @@
 import type { Priority, Status } from '../types'
 
 const STATUS_LABEL: Record<Status, string> = {
-  planned: 'Planned',
+  planned: 'Draft',
   active: 'Active',
   blocked: 'Blocked',
-  done: 'Done',
+  done: 'Completed',
 }
 
 export function StatusBadge({ status }: { status: Status }) {
   return (
-    <span className={`badge status-${status}`}>
-      <span className="dot" />
+    <span className={`pill status-${status}`}>
+      <span className="d" />
       {STATUS_LABEL[status]}
     </span>
   )
@@ -25,20 +25,16 @@ const PRIORITY_LABEL: Record<Priority, string> = {
 export function PriorityBadge({ priority }: { priority: Priority }) {
   return (
     <span className={`prio ${priority}`} title={`${PRIORITY_LABEL[priority]} priority`}>
-      <span className="bars" aria-hidden>
-        <i />
-        <i />
-        <i />
-      </span>
+      <span className="d" />
       {PRIORITY_LABEL[priority]}
     </span>
   )
 }
 
-/** Status color as a raw hex-ish var, for the map pins. */
+/** Raw hex per status for map pins (theme-independent). */
 export const STATUS_COLOR: Record<Status, string> = {
-  planned: 'var(--ink-3)',
-  active: 'var(--primary)',
-  blocked: 'var(--danger)',
-  done: 'var(--success)',
+  planned: '#64748b',
+  active: '#3525cd',
+  blocked: '#ba1a1a',
+  done: '#16803c',
 }
