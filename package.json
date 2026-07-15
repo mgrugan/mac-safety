@@ -1,8 +1,8 @@
 {
-  "name": "mac-take-home",
+  "name": "mac-safety-take-home",
   "private": true,
   "version": "1.0.0",
-  "description": "Mac Take Home — a lightweight field project tracker with a native macOS look, table + map views, weather, and geocoding.",
+  "description": "Mac Safety Take Home — a lightweight field project tracker with a native macOS look, table + map views, weather, and geocoding.",
   "type": "module",
   "scripts": {
     "dev": "vite",

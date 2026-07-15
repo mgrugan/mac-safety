@@ -1,12 +1,12 @@
-# DESIGN.md — Mac Take Home
+# DESIGN.md — Mac Safety Take Home
 
-> Single source of truth for the Mac Take Home design system. Every visual decision in
+> Single source of truth for the Mac Safety Take Home design system. Every visual decision in
 > the app derives from the tokens below. This follows the token-standard shape
 > (`color`, `type`, `space`, `radius`, `elevation`, `motion`) so tooling can lint it.
 
 ## Brand
 
-**Mac Take Home** is a field-operations project tracker with a native macOS feel. The
+**Mac Safety Take Home** is a field-operations project tracker with a native macOS feel. The
 voice is calm, precise, and utilitarian — a tool you trust in the field, not a
 marketing site. No purple gradients, no hero glow, no default AI look.
 

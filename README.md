@@ -1,12 +1,12 @@
-# Mac Take Home — Field Project Tracker
+# Mac Safety Take Home — Field Project Tracker
 
 A lightweight tracker for field-operations projects, built as the basic
 framework of a **Mac-style desktop app**. Projects are managed in a native-feeling
 macOS UI and shown two ways: a sortable **table** and an interactive **map**.
 
 > **Platform note.** The brief asked for a "Mac app." This implementation is a
-> web app that renders an authentic macOS desktop shell (traffic-light titlebar,
-> sidebar, SF system type, light/dark) so it is fully runnable and verifiable in
+> web app that renders an authentic macOS desktop shell (titlebar, sidebar,
+> SF system type, light/dark) so it is fully runnable and verifiable in
 > any browser — and so it can use the web design tooling in `DESIGN.md`. It is
 > structured to wrap cleanly in Tauri/Electron to ship as a real `.app`. See
 > [Packaging as a real Mac app](#packaging-as-a-real-mac-app).
@@ -61,7 +61,7 @@ src/
     weather.ts        Open-Meteo forecast client
     geocode.ts        Open-Meteo geocoding client
   components/
-    TitleBar.tsx      macOS traffic-light titlebar + appearance toggle
+    TitleBar.tsx      macOS-style titlebar + appearance toggle
     Sidebar.tsx       status filters + overview stats
     Toolbar.tsx       view switch, search, filters, New
     ProjectTable.tsx  sortable table list view
@@ -92,7 +92,7 @@ step (needs a Mac to build/sign):
 
 ```bash
 npm create tauri-app   # point it at this Vite build, or add Tauri to this repo
-npm run tauri build    # produces Mac Take Home.app / .dmg
+npm run tauri build    # produces Mac Safety Take Home.app / .dmg
 ```
 
 ## License

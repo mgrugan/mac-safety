@@ -13,12 +13,7 @@ export function TitleBar({ count }: { count: number }) {
 
   return (
     <header className="titlebar">
-      <div className="traffic" aria-hidden>
-        <i className="c" />
-        <i className="m" />
-        <i className="x" />
-      </div>
-      <span className="app-name">Mac Take Home</span>
+      <span className="app-name">Mac Safety Take Home</span>
       <span className="app-sub">
         {count} {count === 1 ? 'project' : 'projects'}
       </span>
