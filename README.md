@@ -40,6 +40,8 @@ React 18 · TypeScript · Vite · Zustand (state + persistence) · MapLibre GL.
 
 ## Getting started
 
+To run locally - 
+
 ```bash
 npm install
 npm run dev      # http://localhost:5173
@@ -47,6 +49,9 @@ npm run dev      # http://localhost:5173
 
 Other scripts: `npm run build` (typecheck + production build), `npm run preview`,
 `npm run typecheck`.
+
+Additionally you could just view it in the page: https://mgrugan.github.io/mac-safety/
+
 
 > Network note: the map tiles, weather, and geocoding call external hosts at
 > runtime. On a normal machine they load automatically. In a locked-down/offline
