@@ -29,9 +29,9 @@ function basemapStyle(theme: Effective): StyleSpecification {
 
 const STATUS_HEX: Record<Status, string> = {
   planned: '#8a8375',
-  active: '#2e6d53',
+  active: '#2b6cb0',
   blocked: '#b4362e',
-  done: '#2b6cb0',
+  done: '#2e7d52',
 }
 
 function pinElement(color: string, selected: boolean): HTMLElement {

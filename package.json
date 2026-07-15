@@ -1,8 +1,8 @@
 {
-  "name": "fieldbase",
+  "name": "mac-take-home",
   "private": true,
   "version": "1.0.0",
-  "description": "FieldBase — a lightweight field project tracker with a native macOS look, table + map views, weather, and geocoding.",
+  "description": "Mac Take Home — a lightweight field project tracker with a native macOS look, table + map views, weather, and geocoding.",
   "type": "module",
   "scripts": {
     "dev": "vite",

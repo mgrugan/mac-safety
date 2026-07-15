@@ -1,4 +1,4 @@
-# FieldBase — Field Project Tracker
+# Mac Take Home — Field Project Tracker
 
 A lightweight tracker for field-operations projects, built as the basic
 framework of a **Mac-style desktop app**. Projects are managed in a native-feeling
@@ -79,7 +79,8 @@ DESIGN.md             design-token system (single source of truth)
 ## Design system
 
 Every visual decision derives from [`DESIGN.md`](./DESIGN.md): a warm-neutral
-"field/topographic" palette with a **pine** primary and **clay** secondary,
+"field/topographic" palette with a **steel-blue** primary, **clay** secondary,
+and a **pine-green** success accent for completed work,
 authentic macOS system type (deliberately **not** Inter/Roboto/Arial), full
 light + dark ramps, and an accessibility checklist (AA contrast, visible focus,
 keyboard paths, reduced-motion). No purple gradients.
@@ -91,7 +92,7 @@ step (needs a Mac to build/sign):
 
 ```bash
 npm create tauri-app   # point it at this Vite build, or add Tauri to this repo
-npm run tauri build    # produces FieldBase.app / .dmg
+npm run tauri build    # produces Mac Take Home.app / .dmg
 ```
 
 ## License

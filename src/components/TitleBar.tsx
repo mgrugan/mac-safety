@@ -18,7 +18,7 @@ export function TitleBar({ count }: { count: number }) {
         <i className="m" />
         <i className="x" />
       </div>
-      <span className="app-name">FieldBase</span>
+      <span className="app-name">Mac Take Home</span>
       <span className="app-sub">
         {count} {count === 1 ? 'project' : 'projects'}
       </span>

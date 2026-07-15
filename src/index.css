@@ -46,14 +46,15 @@
   --ink: #22201b;
   --ink-2: #5c564b;
   --ink-3: #8a8375;
-  --primary: #2e6d53;
-  --primary-hover: #255c45;
+  --primary: #2b6cb0;
+  --primary-hover: #245c96;
   --primary-ink: #ffffff;
-  --primary-weak: #e4efe9;
+  --primary-weak: #e4eef7;
   --secondary: #c2571a;
   --danger: #b4362e;
   --info: #2b6cb0;
-  --focus: #2e6d53;
+  --success: #2e7d52;
+  --focus: #2b6cb0;
   --traffic-close: #ff5f57;
   --traffic-min: #febc2e;
   --traffic-max: #28c840;
@@ -75,14 +76,15 @@
     --ink: #f0ece1;
     --ink-2: #b8b2a2;
     --ink-3: #8a8373;
-    --primary: #4fa07d;
-    --primary-hover: #5bb08b;
-    --primary-ink: #0e1712;
-    --primary-weak: #233129;
+    --primary: #5b9bd8;
+    --primary-hover: #6fa9df;
+    --primary-ink: #0e1621;
+    --primary-weak: #22303f;
     --secondary: #e0803f;
     --danger: #e06a5f;
     --info: #5b9bd8;
-    --focus: #4fa07d;
+    --success: #4fa07d;
+    --focus: #5b9bd8;
   }
 }
 
@@ -96,14 +98,15 @@
   --ink: #f0ece1;
   --ink-2: #b8b2a2;
   --ink-3: #8a8373;
-  --primary: #4fa07d;
-  --primary-hover: #5bb08b;
-  --primary-ink: #0e1712;
-  --primary-weak: #233129;
+  --primary: #5b9bd8;
+  --primary-hover: #6fa9df;
+  --primary-ink: #0e1621;
+  --primary-weak: #22303f;
   --secondary: #e0803f;
   --danger: #e06a5f;
   --info: #5b9bd8;
-  --focus: #4fa07d;
+  --success: #4fa07d;
+  --focus: #5b9bd8;
 }
 
 * {
@@ -561,11 +564,11 @@ table.projects tbody tr[aria-selected='true'] {
   background: var(--danger);
 }
 .badge.status-done {
-  background: color-mix(in srgb, var(--info) 14%, transparent);
-  color: var(--info);
+  background: color-mix(in srgb, var(--success) 15%, transparent);
+  color: var(--success);
 }
 .badge.status-done .dot {
-  background: var(--info);
+  background: var(--success);
 }
 
 .prio {

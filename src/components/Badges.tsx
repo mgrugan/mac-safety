@@ -40,5 +40,5 @@ export const STATUS_COLOR: Record<Status, string> = {
   planned: 'var(--ink-3)',
   active: 'var(--primary)',
   blocked: 'var(--danger)',
-  done: 'var(--info)',
+  done: 'var(--success)',
 }

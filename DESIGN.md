@@ -1,12 +1,12 @@
-# DESIGN.md — FieldBase
+# DESIGN.md — Mac Take Home
 
-> Single source of truth for the FieldBase design system. Every visual decision in
+> Single source of truth for the Mac Take Home design system. Every visual decision in
 > the app derives from the tokens below. This follows the token-standard shape
 > (`color`, `type`, `space`, `radius`, `elevation`, `motion`) so tooling can lint it.
 
 ## Brand
 
-**FieldBase** is a field-operations project tracker with a native macOS feel. The
+**Mac Take Home** is a field-operations project tracker with a native macOS feel. The
 voice is calm, precise, and utilitarian — a tool you trust in the field, not a
 marketing site. No purple gradients, no hero glow, no default AI look.
 
@@ -42,8 +42,9 @@ on display sizes only.
 
 ## Color
 
-Warm-neutral paper base with a **pine** primary and **clay** secondary — an
-outdoors/topographic palette chosen to fit field work. Full light + dark ramps.
+Warm-neutral paper base with a **steel-blue** primary and **clay** secondary, plus
+a **pine-green** success accent for completed work — an outdoors/topographic
+palette chosen to fit field work. Full light + dark ramps.
 Contrast: all text pairs meet WCAG AA (≥ 4.5:1 for body, ≥ 3:1 for large/UI).
 
 ### Light
@@ -59,13 +60,14 @@ Contrast: all text pairs meet WCAG AA (≥ 4.5:1 for body, ≥ 3:1 for large/UI)
 | `--ink`           | `#22201B` | primary text                  |
 | `--ink-2`         | `#5C564B` | secondary text                |
 | `--ink-3`         | `#8A8375` | tertiary / placeholder        |
-| `--primary`       | `#2E6D53` | pine — primary actions        |
+| `--primary`       | `#2B6CB0` | steel-blue — primary actions  |
 | `--primary-ink`   | `#FFFFFF` | text on primary               |
-| `--primary-weak`  | `#E4EFE9` | primary tint bg               |
+| `--primary-weak`  | `#E4EEF7` | primary tint bg               |
 | `--secondary`     | `#C2571A` | clay — accents, warnings      |
 | `--danger`        | `#B4362E` | destructive, blocked          |
+| `--success`       | `#2E7D52` | pine — completed / done       |
 | `--info`          | `#2B6CB0` | informational                 |
-| `--focus`         | `#2E6D53` | focus ring                    |
+| `--focus`         | `#2B6CB0` | focus ring                    |
 
 ### Dark
 
@@ -80,16 +82,17 @@ Contrast: all text pairs meet WCAG AA (≥ 4.5:1 for body, ≥ 3:1 for large/UI)
 | `--ink`           | `#F0ECE1` |
 | `--ink-2`         | `#B8B2A2` |
 | `--ink-3`         | `#8A8373` |
-| `--primary`       | `#4FA07D` |
-| `--primary-ink`   | `#0E1712` |
-| `--primary-weak`  | `#233129` |
+| `--primary`       | `#5B9BD8` |
+| `--primary-ink`   | `#0E1621` |
+| `--primary-weak`  | `#22303F` |
 | `--secondary`     | `#E0803F` |
 | `--danger`        | `#E06A5F` |
+| `--success`       | `#4FA07D` |
 | `--info`          | `#5B9BD8` |
 
 ### Status & priority (semantic, resolve to ink/tints above)
 
-- **Status:** `planned` → ink-3 · `active` → primary · `blocked` → danger · `done` → info(muted)
+- **Status:** `planned` → ink-3 · `active` → primary(blue) · `blocked` → danger · `done` → success(green)
 - **Priority:** `low` → ink-3 · `medium` → secondary · `high` → danger
 
 ## Space
