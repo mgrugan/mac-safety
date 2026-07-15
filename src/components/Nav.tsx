@@ -1,6 +1,5 @@
-import { useStore, type ThemePref } from '../store'
 import type { ViewMode } from '../App'
-import { IconFolder, IconLayers, IconMap, IconSettings, IconAdd } from './icons'
+import { IconFolder, IconLayers, IconMap, IconAdd } from './icons'
 
 export function Nav({
   view,
@@ -15,12 +14,6 @@ export function Nav({
   open: boolean
   onClose: () => void
 }) {
-  const theme = useStore((s) => s.theme)
-  const setTheme = useStore((s) => s.setTheme)
-  const cycleTheme = () => {
-    const order: ThemePref[] = ['system', 'light', 'dark']
-    setTheme(order[(order.indexOf(theme) + 1) % order.length])
-  }
   const go = (v: ViewMode) => {
     onView(v)
     onClose()
@@ -44,16 +37,6 @@ export function Nav({
         </button>
         <button className="nav-item" aria-current={view === 'map'} onClick={() => go('map')}>
           <IconMap /> Map
-        </button>
-        <button
-          className="nav-item"
-          onClick={cycleTheme}
-          title={`Appearance: ${theme}`}
-        >
-          <IconSettings /> Settings
-          <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--on-surface-variant)', textTransform: 'capitalize' }}>
-            {theme}
-          </span>
         </button>
       </div>
 

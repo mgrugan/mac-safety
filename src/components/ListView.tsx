@@ -1,5 +1,6 @@
 import { useStore } from '../store'
 import { PRIORITIES, STATUSES, type Project } from '../types'
+import { downloadProjectsCsv } from '../exportCsv'
 import { ProjectTable } from './ProjectTable'
 import { ProjectCards } from './ProjectCards'
 import { StatsBento } from './StatsBento'
@@ -29,8 +30,13 @@ export function ListView({
           <p>Manage and track {all.length} field {all.length === 1 ? 'operation' : 'operations'} across all sites.</p>
         </div>
         <div className="head-actions">
-          <button className="btn desktop-only" title="Export (not implemented in demo)">
-            <IconDownload /> Export
+          <button
+            className="btn"
+            title={`Export ${visible.length} project(s) as CSV`}
+            disabled={visible.length === 0}
+            onClick={() => downloadProjectsCsv(visible)}
+          >
+            <IconDownload /> Export CSV
           </button>
         </div>
       </div>
